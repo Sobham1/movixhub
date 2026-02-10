@@ -1,12 +1,30 @@
-# React + Vite
+# 🎬 MovixHub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+MovixHub is a sleek and responsive movie discovery app built with React and powered by the TMDB API. It lets users explore popular titles, watch trailers, manage favorites, and even preview upcoming releases—all in a cinematic UI.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- 🔍 **Search Movies** by title and genre
+- 🌟 **Add to Favorites** using Context API
+- 🎞️ **Trailer Previews** directly within movie cards
+- 🎨 **Dark Mode & Custom Styling**
+- 🧭 **Routing** with React Router
+- 🗂️ **Upcoming Movies** section with release dates
+- 📌 **Scroll to Section** for quick navigation
+- 🍿 **Responsive Design** for all screen sizes
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 📦 Tech Stack
+
+- **Frontend:** React + Vite
+- **UI:** CSS Grid, Flexbox, animations
+- **Routing:** React Router DOM
+- **State:** Context API
+- **Icons & Branding:** Custom favicon and visual styling
+- **Deployment:** GitHub Pages
+
+---
+
