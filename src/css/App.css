@@ -5,4 +5,20 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+   padding-top: 70px;
+  position: relative;
+  z-index: 1;
 }
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0d0d0d;
+  font-family: "Lucida Console", monospace;
+  color: white;
+  overflow-x: hidden;
+}
+
+#root {
+  overflow-x: hidden;
+}
+

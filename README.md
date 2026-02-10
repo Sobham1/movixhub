@@ -1,12 +1,49 @@
-# React + Vite
+# 🎬 MovixHub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Your personal gateway to cinematic discovery.**  
+Built with React, Firebase, and flair — MovixHub is a lightweight movie app designed for search, favorites, and seamless user experience.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Live Demo
 
-## Expanding the ESLint configuration
+📁 [GitHub Repository](https://github.com/Sobham1/movixhub)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 📸 Screenshots
+
+
+
+---
+
+## ✨ Features
+
+- 🔎 **Live Search**: Find movies instantly via TMDB API
+- 🔐 **Authentication**: Login/Signup powered by Firebase Auth
+- ❤️ **Favorites**: Save movies to your collection (only if logged in)
+- 🧠 **Firestore Tracking**: Monitor user signups & growth
+- 📱 **Responsive UI**: Styled for desktop & mobile screens
+- 🎨 **SVG Icon Navbar**: Clean routing with cinematic polish
+- 📊 **Analytics Ready** (Google + Firestore support)
+
+---
+
+## 🧪 Tech Stack
+
+- **React** (Vite-powered)
+- **Firebase Authentication & Firestore**
+- **TMDB API** (for movie data)
+- **GitHub Pages / Netlify** (deployment)
+- **Custom CSS with dark theme aesthetics**
+
+
+---
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/yourusername/movixhub.git
+cd movixhub
+npm install
+npm run dev

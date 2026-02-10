@@ -1,13 +1,14 @@
+import { useState, useEffect, useRef } from "react";
 import MovieCard from "../components/MovieCard";
-import { useState, useEffect } from "react";
-import { searchMovies, getPopularMovies } from "../services/api";
+import ComingSoon from "../components/ComingSoon";
+import { getPopularMovies } from "../services/api";
 import "../css/Home.css";
 
 function Home() {
-  const [searchQuery, setSearchQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const upcomingRef = useRef(null);
 
   useEffect(() => {
     const loadPopularMovies = async () => {
@@ -16,7 +17,7 @@ function Home() {
         setMovies(popularMovies);
       } catch (err) {
         console.log(err);
-        setError("Failed to load movies...");
+        setError("Failed to load popular movies.");
       } finally {
         setLoading(false);
       }
@@ -25,51 +26,46 @@ function Home() {
     loadPopularMovies();
   }, []);
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    if (!searchQuery.trim()) return
-    if (loading) return
-
-    setLoading(true)
-    try {
-        const searchResults = await searchMovies(searchQuery)
-        setMovies(searchResults)
-        setError(null)
-    } catch (err) {
-        console.log(err)
-        setError("Failed to search movies...")
-    } finally {
-        setLoading(false)
-    }
-  };
-
   return (
     <div className="home">
-      <form onSubmit={handleSearch} className="search-form">
-        <input
-          type="text"
-          placeholder="Search for movies..."
-          className="search-input"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          style={{ fontFamily: "Lucida Console" }}
-        />
-        <button type="submit" className="search-button" style={{ fontFamily: "Lucida Console" }}>
-          Search
-        </button>
-      </form>
+      <button
+        className="coming-soon-btn"
+        onClick={() => upcomingRef.current?.scrollIntoView({ behavior: "smooth" })}
+      >
+        Coming Soon 🔻
+      </button>
 
-        {error && <div className="error-message">{error}</div>}
+      <h2
+        className="home-title"
+        style={{
+          fontFamily: "Lucida Console",
+          fontSize: "1.8rem",
+          marginLeft: "30px",
+        }}
+      >
+        📽️ Popular Movies
+      </h2>
+
+      {error && <div className="error-message">{error}</div>}
 
       {loading ? (
-        <div className="loading">Loading...</div>
+        <div
+          className="loading"
+          style={{ fontFamily: "Lucida Console", fontSize: "1.2rem" }}
+        >
+          Loading...
+        </div>
       ) : (
         <div className="movies-grid">
           {movies.map((movie) => (
-            <MovieCard movie={movie} key={movie.id} />
+            <MovieCard key={movie.id} movie={movie} />
           ))}
         </div>
       )}
+
+      <div>
+        <ComingSoon scrollRef={upcomingRef} />
+      </div>
     </div>
   );
 }

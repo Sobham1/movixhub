@@ -1,0 +1,70 @@
+.about-page {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+  font-family: "Lucida Console", monospace;
+  color: white;
+  background-color: #121212;
+}
+
+.about-page h2 {
+  font-size: 2rem;
+  color: #e50914;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.about-page h3 {
+  margin-top: 2rem;
+  color: #e50914;
+  font-size: 1.3rem;
+}
+
+.about-page p {
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.about-page ul {
+  padding-left: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+.about-page li {
+  margin-bottom: 0.5rem;
+  list-style-type: "•";
+}
+
+.about-page a {
+  color: #e50914;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.about-page a:hover {
+  text-decoration: underline;
+}
+
+.about-page em,
+.about-page .credit-line {
+  color: #aaa;
+  font-style: italic;
+  margin-top: 1.5rem;
+  display: block;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .about-page {
+    padding: 1rem;
+  }
+
+  .about-page h2 {
+    font-size: 1.6rem;
+  }
+
+  .about-page h3 {
+    font-size: 1.1rem;
+  }
+}
