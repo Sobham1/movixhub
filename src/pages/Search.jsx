@@ -1,65 +1,159 @@
-// src/pages/Search.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { searchMovies } from "../services/api";
 import MovieCard from "../components/MovieCard";
-import "../css/Home.css"; // reuse same styles if needed
 
 function Search() {
   const [searchQuery, setSearchQuery] = useState("");
   const [results, setResults] = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
-  const handleSearch = async e => {
-    e.preventDefault();
-    if (!searchQuery.trim()) return;
+  // 🔎 Auto suggestions while typing (debounced)
+  useEffect(() => {
+    const delayDebounce = setTimeout(async () => {
+      if (!searchQuery.trim()) {
+        setSuggestions([]);
+        return;
+      }
+
+      try {
+        const movies = await searchMovies(searchQuery);
+        setSuggestions(movies.slice(0, 5)); // limit suggestions
+      } catch (err) {
+        console.error(err);
+      }
+    }, 400);
+
+    return () => clearTimeout(delayDebounce);
+  }, [searchQuery]);
+
+  const handleSearch = async (query = searchQuery) => {
+    if (!query.trim()) return;
 
     setLoading(true);
+    setShowSuggestions(false);
+
     try {
-      const movies = await searchMovies(searchQuery);
+      const movies = await searchMovies(query);
       setResults(movies);
-      setError(null);
     } catch (err) {
-      setError("Failed to fetch results.");
+      console.error(err);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="home">
-      <form onSubmit={handleSearch} className="search-form">
+    <div className="max-w-7xl mx-auto px-6 space-y-12">
+
+      {/* Title */}
+     <div className="text-center">
+  <h2 className="text-3xl font-semibold tracking-tight text-white">
+    Search Movies
+  </h2>
+  <p className="text-gray-400 mt-2 text-sm">
+    Find your favorite films instantly.
+  </p>
+</div>
+
+
+      {/* Search Bar */}
+      <div className="relative w-full max-w-2xl mx-auto">
+
         <input
           type="text"
           placeholder="Search for movies..."
-          className="search-input"
           value={searchQuery}
-          onChange={e => setSearchQuery(e.target.value)}
+          onChange={(e) => {
+            setSearchQuery(e.target.value);
+            setShowSuggestions(true);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") handleSearch();
+          }}
+          className="
+            w-full
+            bg-slate-800/60
+            backdrop-blur-md
+            border border-white/10
+            rounded-xl
+            px-5 py-3
+            text-white
+            placeholder-gray-400
+            focus:outline-none
+            focus:ring-2
+            focus:ring-red-500/60
+            transition
+          "
         />
-       <button type="submit" className="search-button-img">
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    fill="white"
-    viewBox="0 0 24 24"
-  >
-    <path d="M10 2a8 8 0 105.293 14.293l5.707 5.707-1.414 1.414-5.707-5.707A8 8 0 0010 2z" />
-  </svg>
-</button>
 
-      </form>
+        {/* Suggestions Dropdown */}
+        {showSuggestions && suggestions.length > 0 && (
+          <div className="
+            absolute
+            mt-2
+            w-full
+            bg-slate-900/80
+            backdrop-blur-xl
+            border border-white/10
+            rounded-xl
+            shadow-2xl
+            overflow-hidden
+            z-50
+          ">
+            {suggestions.map((movie) => (
+              <div
+                key={movie.id}
+                onClick={() => {
+                  setSearchQuery(movie.title);
+                  handleSearch(movie.title);
+                }}
+                className="
+                  px-4 py-3
+                  text-sm text-gray-300
+                  hover:bg-white/10
+                  hover:text-white
+                  cursor-pointer
+                  transition
+                "
+              >
+                {movie.title}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
-      {error && <div className="error-message">{error}</div>}
-      {loading ? (
-        <div className="loading">Loading...</div>
-      ) : (
-        <div className="movies-grid">
+      {/* Loading */}
+      {loading && (
+        <div className="text-gray-400 animate-pulse">
+          Searching movies...
+        </div>
+      )}
+
+      {/* Results */}
+      {!loading && results.length > 0 && (
+        <div className="
+  grid
+  gap-10
+  justify-center
+  grid-cols-[repeat(auto-fit,minmax(180px,220px))]
+">
+
           {results.map(movie => (
             <MovieCard key={movie.id} movie={movie} />
           ))}
         </div>
       )}
+
+      {/* Empty State */}
+      {!loading && results.length === 0 && searchQuery && (
+        <div className="text-gray-500 text-sm">
+          No results found.
+        </div>
+      )}
+
     </div>
   );
 }

@@ -41,8 +41,8 @@
 .auth-form button {
   width: 100%;
   padding: 0.75rem;
-  background-color: #e50914;
-  color: white;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
   border: none;
   border-radius: 6px;
   font-size: 1rem;
@@ -52,7 +52,8 @@
 }
 
 .auth-form button:hover {
-  background-color: #ff2b3a;
+  background-color: #6e5aec;
+  color:white;
 }
 
 @media (max-width: 480px) {

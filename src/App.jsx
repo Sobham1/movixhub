@@ -11,8 +11,12 @@ import About from "./pages/About";
 function App() {
   return (
     <MovieProvider>
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-black text-white">
       <NavBar />
-      <main className="main-content">
+      <main className="min-h-screen pt-28 pb-16 px-6">
+
+
+
         <Routes>
           <Route path="/" element={<Home />} />
            <Route path="/search" element={<Search />} />
@@ -23,6 +27,7 @@ function App() {
           <Route path="/about" element={<About />} />
         </Routes>
       </main>
+      </div>
     </MovieProvider>
   );
 }
