@@ -1,9 +1,8 @@
 import "../css/MovieCard.css";
-import { getMovieTrailer } from "../services/api.js";
 import { useMovieContext } from "../contexts/MovieContext";
 import { useState, useEffect } from "react";
 
-function MovieCard({ movie }) {
+function MovieCard({ movie,onPlayTrailer }) {
   const {
     isFavorite,
     addToFavorites,
@@ -13,21 +12,11 @@ function MovieCard({ movie }) {
 
   const favorite = isFavorite(movie.id);
 
-  const [trailerKey, setTrailerKey] = useState(null);
-  const [showTrailer, setShowTrailer] = useState(false);
+  //const [trailerKey, setTrailerKey] = useState(null);
+  //const [showTrailer, setShowTrailer] = useState(false);
   const [showLoginToast, setShowLoginToast] = useState(false);
 
-  // Fetch trailer when requested
-  useEffect(() => {
-    if (!showTrailer) return;
 
-    const fetchTrailer = async () => {
-      const key = await getMovieTrailer(movie.id);
-      setTrailerKey(key);
-    };
-
-    fetchTrailer();
-  }, [showTrailer, movie.id]);
 
   // Handle favorite click
   const onFavoriteClick = e => {
@@ -75,24 +64,25 @@ function MovieCard({ movie }) {
     <div className="
       absolute bottom-4 left-4 right-4
       text-white
-      opacity-0
-      translate-y-4
-      transition duration-500
-      group-hover:opacity-100
-      group-hover:translate-y-0
+      opacity-100 sm:opacity-0
+translate-y-0 sm:translate-y-4
+sm:group-hover:opacity-100
+sm:group-hover:translate-y-0
+
     ">
 {/* Play Button Overlay */}
-<button
-  onClick={() => setShowTrailer(true)}
+ <button
+  onClick={() => onPlayTrailer(movie.id)}
   className="
     absolute inset-0
     flex items-center justify-center
-    opacity-0 group-hover:opacity-100
+    opacity-100 sm:opacity-0 sm:group-hover:opacity-100
     transition duration-300
   "
 >
   <div className="
-    w-14 h-14
+   w-12 h-12 sm:w-14 sm:h-14
+
     rounded-full
     bg-white/20
     backdrop-blur-md
@@ -105,31 +95,8 @@ function MovieCard({ movie }) {
     ▶
   </div>
 </button>
-{/* 🎬 TRAILER MODAL GOES HERE */}
-    {showTrailer && trailerKey && (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md">
 
-        <div className="relative w-[90%] max-w-3xl aspect-video bg-black rounded-xl overflow-hidden shadow-2xl">
 
-          <button
-            onClick={() => setShowTrailer(false)}
-            className="absolute top-3 right-3 text-white text-xl z-10"
-          >
-            ✕
-          </button>
-
-          <iframe
-            width="100%"
-            height="100%"
-            src={`https://www.youtube.com/embed/${trailerKey}`}
-            title="Trailer"
-            frameBorder="0"
-            allow="autoplay; encrypted-media; picture-in-picture"
-            allowFullScreen
-          />
-        </div>
-      </div>
-    )}
   
      <h3 className="text-lg font-semibold tracking-tight">
   {movie.title}

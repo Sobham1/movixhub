@@ -44,10 +44,17 @@ function ComingSoon({ scrollRef }) {
       {/* Grid */}
       {!loading && (
         <div className="
-          grid
-          gap-10
-          grid-cols-[repeat(auto-fit,minmax(200px,1fr))]
-        ">
+  grid
+  grid-cols-2
+  sm:grid-cols-3
+  md:grid-cols-4
+  lg:grid-cols-5
+  gap-x-4
+  gap-y-8
+  sm:gap-x-8
+  sm:gap-y-12
+">
+
           {movies.map(movie => (
             <ComingSoonCard key={movie.id} movie={movie} />
           ))}

@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import { getMovieTrailer } from "./services/api";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
@@ -9,23 +11,72 @@ import Signup from "./pages/Signup";
 import Search from "./pages/Search";
 import About from "./pages/About";
 function App() {
+  const [activeTrailer, setActiveTrailer] = useState(null);
+
+const handlePlayTrailer = async (movieId) => {
+  const key = await getMovieTrailer(movieId);
+  if (key) {
+    setActiveTrailer(key);
+  }
+};
   return (
     <MovieProvider>
       <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-black text-white">
       <NavBar />
-      <main className="min-h-screen pt-28 pb-16 px-6">
+     <main className="pt-24 sm:pt-28 pb-16 px-4 sm:px-6">
 
 
 
         <Routes>
-          <Route path="/" element={<Home />} />
-           <Route path="/search" element={<Search />} />
-          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/" element={<Home onPlayTrailer={handlePlayTrailer} />} />
+          <Route path="/search" element={<Search onPlayTrailer={handlePlayTrailer} />} />
+          <Route path="/favorites" element={<Favorites onPlayTrailer={handlePlayTrailer} />} />
           <Route path="/coming-soon" element={<ComingSoon />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/about" element={<About />} />
         </Routes>
+        {activeTrailer && (
+  <div
+    onClick={() => setActiveTrailer(null)}
+    className="
+      fixed inset-0
+      bg-black/80
+      backdrop-blur-md
+      flex items-center justify-center
+      z-[100]
+    "
+  >
+    <div
+      onClick={(e) => e.stopPropagation()}
+      className="
+        relative
+        w-full
+        max-w-5xl
+        mx-4
+        aspect-video
+        rounded-xl
+        overflow-hidden
+        shadow-2xl
+        bg-black
+      "
+    >
+      <button
+        onClick={() => setActiveTrailer(null)}
+        className="absolute top-3 right-3 text-white text-xl z-10"
+      >
+        ✕
+      </button>
+
+      <iframe
+        src={`https://www.youtube.com/embed/${activeTrailer}?autoplay=1`}
+        className="w-full h-full"
+        allow="autoplay; encrypted-media; picture-in-picture"
+        allowFullScreen
+      />
+    </div>
+  </div>
+)}
       </main>
       </div>
     </MovieProvider>

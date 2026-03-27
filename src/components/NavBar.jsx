@@ -28,13 +28,28 @@ function NavBar() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+useEffect(() => {
+  const handleClickOutside = (e) => {
+    if (!e.target.closest("nav")) {
+      setMobileOpen(false);
+    }
+  };
+
+  if (mobileOpen) {
+    document.addEventListener("mousedown", handleClickOutside);
+  }
+
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, [mobileOpen]);
 
   return (
     <nav className="sticky top-6 z-50 flex justify-center">
       <div className="
         relative
         w-[92%] max-w-6xl
-        h-[68px]
+      h-[60px] sm:h-[68px]
         px-6
         flex items-center justify-between
         rounded-2xl
@@ -45,7 +60,7 @@ function NavBar() {
       ">
 
         {/* Logo */}
-        <div className="text-xl font-semibold tracking-wide text-white">
+        <div className="text-lg sm:text-xl font-semibold tracking-wide text-white">
           MovixHub
         </div>
 
@@ -155,20 +170,21 @@ function NavBar() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="
-          absolute top-[100px]
-          w-[92%] max-w-6xl
-          bg-slate-900/90
-          backdrop-blur-xl
-          border border-white/10
-          rounded-2xl
-          shadow-2xl
-          py-6
-          px-6
-          flex flex-col gap-6
-          text-gray-300
-          md:hidden
-        ">
+  <div className="
+    fixed top-20 left-1/2 -translate-x-1/2
+    w-[92%] max-w-6xl
+    bg-slate-900/95
+    backdrop-blur-xl
+    border border-white/10
+    rounded-2xl
+    shadow-2xl
+    py-6 px-6
+    flex flex-col gap-6
+    text-gray-300
+    md:hidden
+    z-40
+  ">
+
           <Link to="/" onClick={() => setMobileOpen(false)}>Home</Link>
           <Link to="/search" onClick={() => setMobileOpen(false)}>Search</Link>
           <Link to="/favorites" onClick={() => setMobileOpen(false)}>Favorites</Link>

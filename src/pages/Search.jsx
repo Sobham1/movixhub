@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { searchMovies } from "../services/api";
 import MovieCard from "../components/MovieCard";
 
-function Search() {
+function Search({onPlayTrailer}) {
   const [searchQuery, setSearchQuery] = useState("");
   const [results, setResults] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
@@ -142,7 +142,9 @@ function Search() {
 ">
 
           {results.map(movie => (
-            <MovieCard key={movie.id} movie={movie} />
+            <MovieCard key={movie.id} movie={movie} 
+            onPlayTrailer={onPlayTrailer}
+            />
           ))}
         </div>
       )}

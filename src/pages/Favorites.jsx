@@ -2,7 +2,7 @@ import { useMovieContext } from "../contexts/MovieContext";
 import MovieCard from "../components/MovieCard";
 import { Link } from "react-router-dom";
 
-function Favorites() {
+function Favorites({onPlayTrailer}) {
   const { favorites, currentUser } = useMovieContext();
 
   return (
@@ -84,7 +84,9 @@ function Favorites() {
           grid-cols-[repeat(auto-fit,minmax(200px,240px))]
         ">
           {favorites.map(movie => (
-            <MovieCard key={movie.id} movie={movie} />
+            <MovieCard key={movie.id} movie={movie} 
+            onPlayTrailer={onPlayTrailer}
+            />
           ))}
         </div>
       )}
