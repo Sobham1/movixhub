@@ -8,8 +8,8 @@ function Search({onPlayTrailer}) {
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
-
-  // 🔎 Auto suggestions while typing (debounced)
+  const [hasSearched, setHasSearched] = useState(false);
+  //  Auto suggestions while typing (debounced)
   useEffect(() => {
     const delayDebounce = setTimeout(async () => {
       if (!searchQuery.trim()) {
@@ -29,20 +29,21 @@ function Search({onPlayTrailer}) {
   }, [searchQuery]);
 
   const handleSearch = async (query = searchQuery) => {
-    if (!query.trim()) return;
+  if (!query.trim()) return;
 
-    setLoading(true);
-    setShowSuggestions(false);
+  setLoading(true);
+  setShowSuggestions(false);
+  setHasSearched(true); //important
 
-    try {
-      const movies = await searchMovies(query);
-      setResults(movies);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  try {
+    const movies = await searchMovies(query);
+    setResults(movies);
+  } catch (err) {
+    console.error(err);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="max-w-7xl mx-auto px-6 space-y-12">
@@ -150,8 +151,8 @@ function Search({onPlayTrailer}) {
       )}
 
       {/* Empty State */}
-      {!loading && results.length === 0 && searchQuery && (
-        <div className="text-gray-500 text-sm">
+      {!loading && hasSearched && results.length === 0 && (
+        <div className="text-gray-500 text-sm text-center">
           No results found.
         </div>
       )}

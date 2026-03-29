@@ -8,7 +8,11 @@ export const useMovieContext = () => useContext(MovieContext);
 export const MovieProvider = ({ children }) => {
   const [favorites, setFavorites] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
-
+useEffect(() => {
+  if (!currentUser) {
+    setFavorites([]);
+  }
+}, [currentUser]);
   // Track Firebase login state
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {

@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import MovieCard from "../components/MovieCard";
 import ComingSoon from "../components/ComingSoon";
 import { getPopularMovies } from "../services/api";
-import { getMovieTrailer } from "../services/api";
 
 
 

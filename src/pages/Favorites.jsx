@@ -10,10 +10,10 @@ function Favorites({onPlayTrailer}) {
 
       {/* Header */}
       <div>
-        <h2 className="text-3xl font-semibold tracking-tight text-white">
+        <h2 className="text-3xl font-semibold tracking-tight text-white text-center">
           Your Favorites
         </h2>
-        <p className="text-gray-400 text-sm mt-2">
+        <p className="text-gray-400 text-sm mt-2 text-center">
           Movies you’ve saved for later.
         </p>
       </div>
