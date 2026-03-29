@@ -74,8 +74,7 @@ sm:group-hover:translate-y-0
  <button
   onClick={() => onPlayTrailer(movie.id)}
   className="
-    absolute inset-0
-    flex items-center justify-center
+    absolute bottom-20 right-12
     opacity-100 sm:opacity-0 sm:group-hover:opacity-100
     transition duration-300
   "
