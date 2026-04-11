@@ -137,9 +137,16 @@ function Search({onPlayTrailer}) {
       {!loading && results.length > 0 && (
         <div className="
   grid
-  gap-10
+  grid-cols-2
+  sm:grid-cols-3
+  md:grid-cols-4
+  lg:grid-cols-5
+  gap-x-4
+  gap-y-8
+  sm:gap-x-8
+  sm:gap-y-12
   justify-center
-  grid-cols-[repeat(auto-fit,minmax(180px,220px))]
+  
 ">
 
           {results.map(movie => (
