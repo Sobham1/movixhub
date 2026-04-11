@@ -78,6 +78,31 @@ const handlePlayTrailer = async (movieId) => {
   </div>
 )}
       </main>
+      <footer className="
+  mt-16
+  border-t border-white/10
+  bg-slate-900/40
+  backdrop-blur-md
+">
+  <div className="
+    max-w-7xl mx-auto
+    px-4 sm:px-6
+    py-6
+    text-center
+    text-gray-400 text-sm
+  ">
+    © {new Date().getFullYear()} Sobham Sandilya · Jorhat Engineering College
+  <div className="flex justify-center gap-6 mb-2 text-gray-400 text-sm">
+  <a href="https://github.com/Sobham1" target="_blank" className="hover:text-white transition">
+    GitHub
+  </a>
+  <a href="https://linkedin.com/in/sobham-sandilya" target="_blank" className="hover:text-white transition">
+    LinkedIn
+  </a>
+</div>
+  </div>
+  
+</footer>
       </div>
     </MovieProvider>
   );

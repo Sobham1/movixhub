@@ -86,7 +86,7 @@ useEffect(() => {
         Coming Soon ↓
       </button>
     </div>
-
+        
     {/* Error */}
     {error && (
       <div className="text-red-400 text-sm text-center">
@@ -241,7 +241,6 @@ useEffect(() => {
 
   </div>
 );
-
 }
 
 export default Home;

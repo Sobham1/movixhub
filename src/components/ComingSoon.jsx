@@ -62,7 +62,9 @@ function ComingSoon({ scrollRef }) {
       )}
 
     </div>
+    
   );
+  
 }
 
 export default ComingSoon;
